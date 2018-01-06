@@ -1503,4 +1503,4 @@ bot.on('message', (message) => {
     }
 });
 
-client.login/process.env.B0T_T0KEN);
+client.login(process.env.B0T_T0KEN);
