@@ -2,7 +2,7 @@
   "name": "tingle-bot",
   "version": "0.1.0",
   "description": "Tingle-Bot",
-  "main": "app.js",
+  "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
