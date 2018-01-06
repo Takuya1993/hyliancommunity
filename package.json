@@ -1,0 +1,17 @@
+{
+  "name": "tingle-bot",
+  "version": "0.1.0",
+  "description": "Tingle-Bot",
+  "main": "app.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": {
+    "name": "Takuya"
+  },
+  "dependencies": {
+    "dateformat": "^3.0.2",
+    "discord.js": "^11.0.0",
+    "pm2": "^2.7.2"
+  }
+}
