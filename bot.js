@@ -4,7 +4,6 @@ var bot = new Discord.Client();
 
 try {
     //---Configs---//
-    var AuthDetails = require('./config/auth.json');
     var config = require("./config/config.json");
     var emoji = require("./config/emoji.json");
     var badges = require("./config/badges.json");
@@ -28,78 +27,6 @@ var rainCount = 0;
 var rainMax = 0;
 var rainStock = [];
 var rainStats = {}
-
-/*
-     Bot is ready
-*/
-bot.on("ready", function () {
-    console.log("Ready! Serving in " + bot.guilds.array().length + " Server(s)");
-    bot.user.setGame("+help");
-    setTime();
-    setInterval(setTime, 60000);
-});
-
-bot.on('disconnected', function() {
-    console.log("disconnected re-logging in");
-    bot.login(AuthDetails.bot_token);
-});
-
-function setTime() {
-    db.curHour = new Date().getHours();
-    //if (db.curHour >= 24) {
-    //    db.curHour = 0;
-    //} else db.curHour++;
-    saveJSON();
-
-    var nextEvent = 0;
-
-    if (!db.event1) nextEvent = db.event1Time;
-    if (!db.event2) nextEvent = db.event2Time;
-    if (!db.event3) nextEvent = db.event3Time;
-
-    console.log(`Time: ${db.curHour} Next Event: ${nextEvent}`);
-    if (db.curHour == db.event1Time) {
-        if (!db.event1) {
-            eRain();
-            log(dateFormat(new Date(), "dd/mm/yyyy, h:MM:ss TT") + " | 1-07 Rupee rain Event start");
-            db.event1 = true;
-            db.event2 = false;
-            db.event2Time = Math.floor(Math.random() * (15 - 9 + 1) + 9);
-            saveJSON();
-            console.log(`1-07 Event: ${db.event1}`);
-        }
-    } else if (db.curHour == db.event2Time) {
-        if (!db.event2) {
-            eRain();
-            log(dateFormat(new Date(), "dd/mm/yyyy, h:MM:ss TT") + " | 09-15 Rupee rain Event start");
-            db.event2 = true;
-            db.event3 = false;
-            db.event3Time = Math.floor(Math.random() * (23 - 17 + 1) + 17);
-            saveJSON();
-            console.log(`09-15 Event: ${db.event2}`);
-        }
-    } else if (db.curHour == db.event3Time) {
-        if (!db.event3) {
-            eRain();
-            log(dateFormat(new Date(), "dd/mm/yyyy, h:MM:ss TT") + " | 17-23 Rupee rain Event start");
-            db.event3 = true;
-            db.event1 = false;
-            db.event1Time = Math.floor(Math.random() * (7 - 1 + 1) + 1);
-            saveJSON();
-            console.log(`17-23 Event: ${db.event2}`);
-        }
-    }
-}
-
-function cleanArray(actual) {
-    var newArray = new Array();
-    for (var i = 0; i < actual.length; i++) {
-        if (actual[i]) {
-            newArray.push(actual[i]);
-        }
-    }
-    return newArray;
-}
 
 /*
      Welcome new users
